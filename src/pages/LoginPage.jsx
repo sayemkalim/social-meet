@@ -29,8 +29,18 @@ const LoginPage = () => {
     const data = await response.json();
 
     if (response.ok) {
-      toast.success('Login successful!');
-      console.log('Login successful:', data);
+        toast.success('Login successful.', {
+            style: {
+              border: '1px solid #713200',
+              padding: '16px',
+              color: '#713200',
+            },
+            iconTheme: {
+              primary: '#0B0B0B',
+              secondary: '#FFFAEE',
+            },
+          }); 
+    console.log('Login successful:', data);
       setTimeout(() => {
         navigate("/home");
       }, 2000)  
@@ -42,7 +52,7 @@ const LoginPage = () => {
 
   return (
     <>
-    <Toaster position="top-right" duration="3000" />
+    <Toaster   position="top-center" duration="3000" />
     <div className="w-full lg:grid lg:min-h-[400px] lg:grid-cols-2 xl:min-h-[400px]">
       <div className="hidden bg-muted lg:block">
         <img src={wall} alt="Image" />
@@ -57,10 +67,10 @@ const LoginPage = () => {
           </div>
           <form onSubmit={handleLogin} className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="userName">Email</Label>
+              <Label htmlFor="userName">User Name</Label>
               <Input
                 id="userName"
-                placeholder="m@example.com"
+                placeholder="sayem"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 required
@@ -73,6 +83,7 @@ const LoginPage = () => {
               <Input
                 id="password"
                 type="password"
+                placeholder="******"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
