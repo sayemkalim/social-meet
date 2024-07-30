@@ -4,9 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link, useNavigate } from "react-router-dom";
 import wall from "../assets/wall.jpg";
+import { Toaster, toast } from "react-hot-toast";
 
 const LoginPage = () => {
-  const [userName, setuserName] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -28,14 +29,20 @@ const LoginPage = () => {
     const data = await response.json();
 
     if (response.ok) {
+      toast.success('Login successful!');
       console.log('Login successful:', data);
-      navigate('/home');
-    } else {
+      setTimeout(() => {
+        navigate("/home");
+      }, 2000)  
+      } else {
+      toast.error(data.message || 'Login failed');
       setError(data.message || 'Login failed');
     }
   };
 
   return (
+    <>
+    <Toaster position="top-right" duration="3000" />
     <div className="w-full lg:grid lg:min-h-[400px] lg:grid-cols-2 xl:min-h-[400px]">
       <div className="hidden bg-muted lg:block">
         <img src={wall} alt="Image" />
@@ -50,12 +57,12 @@ const LoginPage = () => {
           </div>
           <form onSubmit={handleLogin} className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="userName">Email</Label>
               <Input
                 id="userName"
                 placeholder="m@example.com"
                 value={userName}
-                onChange={(e) => setuserName(e.target.value)}
+                onChange={(e) => setUserName(e.target.value)}
                 required
               />
             </div>
@@ -85,6 +92,7 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
