@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import {
-  Card,
   CardContent,
 } from "@/components/ui/card";
 import wall from "../assets/wall.jpg";
